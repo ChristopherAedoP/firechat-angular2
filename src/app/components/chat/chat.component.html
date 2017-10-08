@@ -1,0 +1,94 @@
+<h3>Chat</h3>
+<hr>
+
+<div id="app-mensajes_0" class="app-mensajes">
+
+  <div  *ngFor="let chat of _cs.chats | async"
+     [ngClass]="{'text-right': _cs.usuario.uid == chat.uid  }"
+    >
+    <span class="badge " [ngClass]="{'badge-primary': _cs.usuario.uid == chat.uid , 'badge-success': _cs.usuario.uid != chat.uid }">
+      {{ chat.nombre }}
+    </span>
+    <p>
+       {{ chat.mensaje }}
+    </p>
+  </div>
+
+</div>
+
+<input [(ngModel)]="mensaje"
+      name="mensaje"
+      (keyup.enter)="enviar()"
+      class="form-control"
+      placeholder="mensaje..." >
+
+
+<aside id="sidebar_secondary" class="tabbed_sidebar ng-scope chat_sidebar">
+
+  <div class="popup-head">
+    <div class="popup-head-left pull-left" style="width: 200px">
+      <a title="{{this._cs.usuario.displayName}}" >
+        <img class="md-user-image" alt="{{this._cs.usuario.displayName}}"  [src]="this._cs.usuario.photoURL"
+          title="{{this._cs.usuario.displayName}}">
+        <h1> {{this._cs.usuario.displayName}}</h1>
+        <small>
+           {{this._cs.usuario.email}}</small>
+      </a>
+    </div>
+
+    <div class="popup-head-right pull-right">
+
+
+          <button (click)="salir()"
+          data-toggle="tooltip" data-placement="top" title="Salir del chat" class="btn btn-outline-danger btn-sm pull-right" type="button">
+              X
+          </button>
+
+        </div>
+  </div>
+
+  <div id="app-mensajes" class="chat_box_wrapper chat_box_small chat_box_active" style="opacity: 1; display: block; transform: translateX(0px);">
+    <div class="chat_box touchscroll chat_box_colors_a">
+
+
+      <div  *ngFor="let chat of _cs.chats | async"
+            [ngClass]="{'chat_message_right': _cs.usuario.uid == chat.uid }"
+            class="chat_message_wrapper animated fadeIn">
+
+        <div class="chat_user_avatar">
+
+            <img *ngIf="chat.photoURL"  alt="{{ chat.nombre }}" title="{{ chat.nombre }}" [src]="chat.photoURL"
+              class="md-user-image">
+
+            <span *ngIf="!chat.photoURL" class="badge " [ngClass]="{'badge-primary': _cs.usuario.uid == chat.uid , 'badge-success': _cs.usuario.uid != chat.uid }">
+              {{ chat.nombre }}
+            </span>
+        </div>
+
+        <ul class="chat_message">
+          <li>
+            <p>  {{ chat.mensaje }} </p>
+            <span class="chat_message_time">{{ chat.fecha | date:'medium'}}</span>
+          </li>
+
+          <!-- <li>
+            <p> Lorem ipsum dolor sit amet.
+              <span class="chat_message_time">{{ chat.fecha | date:'medium'}}</span>
+            </p>
+          </li> -->
+
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="chat_submit_box">
+    <div class="uk-input-group">
+      <div class="gurdeep-chat-box">
+
+        <input [(ngModel)]="mensaje" name="mensaje" (keyup.enter)="enviar()" class="form-control" placeholder="Ingrese Mensaje...">
+
+      </div>
+    </div>
+  </div>
