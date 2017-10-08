@@ -28,8 +28,8 @@
   <div class="popup-head">
     <div class="popup-head-left pull-left" style="width: 200px">
       <a title="{{this._cs.usuario.displayName}}" >
-        <img class="md-user-image" alt="{{this._cs.usuario.displayName}}"  [src]="this._cs.usuario.photoURL"
-          title="{{this._cs.usuario.displayName}}">
+        <img class="md-user-image" alt="{{this._cs.usuario.displayName}}" [src]="this._cs.usuario.photoURL" title="{{this._cs.usuario.displayName}}">
+
         <h1> {{this._cs.usuario.displayName}}</h1>
         <small>
            {{this._cs.usuario.email}}</small>
@@ -57,9 +57,17 @@
 
         <div class="chat_user_avatar">
 
-            <img *ngIf="chat.photoURL"  alt="{{ chat.nombre }}" title="{{ chat.nombre }}" [src]="chat.photoURL"
-              class="md-user-image">
+            <!-- <img *ngIf="chat.photoURL"  alt="{{ chat.nombre }}" title="{{ chat.nombre }}" [src]="chat.photoURL"
+              class="md-user-image"> -->
+              <div class="hexagon" [ngStyle]="{'background-image': 'url(' + chat.photoURL + ')'}">
+                <div class="hexTop"></div>
+                <!-- <img *ngIf="chat.photoURL" alt="{{ chat.nombre }}" title="{{ chat.nombre }}" [src]="chat.photoURL" class="md-user-image"> -->
+                <div class="hexBottom"></div>
 
+              </div>
+            <!-- <div class="hexagon">
+              <span><img *ngIf="chat.photoURL" alt="{{ chat.nombre }}" title="{{ chat.nombre }}" [src]="chat.photoURL" class="md-user-image"></span>
+            </div> -->
             <span *ngIf="!chat.photoURL" class="badge " [ngClass]="{'badge-primary': _cs.usuario.uid == chat.uid , 'badge-success': _cs.usuario.uid != chat.uid }">
               {{ chat.nombre }}
             </span>
