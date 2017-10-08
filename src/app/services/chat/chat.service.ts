@@ -58,7 +58,7 @@ export class ChatService {
     }
 
     this.afAuth.auth.signInWithPopup( provider ).then(respuesta => {
-      console.log(respuesta);
+      // console.log(respuesta);
       this.usuario = respuesta.user;
       localStorage.setItem('usuario', JSON.stringify(this.usuario));
     });
